@@ -56,17 +56,17 @@ database.ref().on("child_added", function(childSnapshot) {
     var trainName = childSnapshot.val().name;
     var trainDestination = childSnapshot.val().destination;
     var firstTrain = childSnapshot.val().time;
-    var trainFrequency = childSnapshot.val().frequency;
+    var trainFrequency = parseInt (childSnapshot.val().frequency);
 
     // Prettify the train time
     trainTime = moment(firstTrain, "HH:mm").subtract(1, "years");
     
     // Calculate the minutes until the next train
-    var trainRemainder = moment().diff(moment(firstTrain), "minutes") % trainFrequency;
+    var trainRemainder = parseInt(moment().diff(moment(firstTrain), "minutes")) % trainFrequency;
     var trainMinutes = trainFrequency - trainRemainder;
 
     // calculate the arrival time
-    var trainArrival = moment().add(trainMinutes, "minutes").format("hh:mm A");
+    var trainArrival = moment().add(trainMinutes, "minutes").format("hh:mm");
 
     // creat the new row
     var newRow = $("<tr>").append(
