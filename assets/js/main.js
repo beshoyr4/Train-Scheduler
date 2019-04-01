@@ -66,7 +66,7 @@ database.ref().on("child_added", function(childSnapshot) {
     var trainMinutes = trainFrequency - trainRemainder;
 
     // calculate the arrival time
-    var trainArrival = moment().add(trainMinutes, "minutes").format("hh:mm");
+    var trainArrival = parseInt(moment().add(trainMinutes, "minutes").format("hh:mm"));
 
     // creat the new row
     var newRow = $("<tr>").append(
